@@ -86,7 +86,35 @@ function update (req, res) {
     res.json(post);
 };
 function modify (req, res) {
-    res.send('Modifica parziale del post ' + req.params.id);
+    // res.send('Modifica parziale del post ' + req.params.id);
+    
+    // Recuperiamo l'id dall' URL
+    const id = parseInt(req.params.id)
+
+    const post = postsRouter.find(post => post.id);
+
+    if(!post) {
+        res.status(404);
+
+        return res.json({
+            error: "Not Found",
+            message: "Post non trovato"
+        })
+    }
+
+    const postInviato = req.body;
+
+    // Aggiorno il post
+    postInviato.title ? post.title = postInviato.title : post.title = post.title;
+    postInviato.content ? post.content = postInviato.content : post.content = post.content;
+    postInviato.image ? post.image = postInviato.image : post.image = post.image;
+    postInviato.tags ? post.tags = postInviato.tags : post.tags = post.tags;
+
+    // Controlliamo il post
+    console.log(postsRouter);
+
+    // Restituiamo il post creato
+    res.json(post);
 };
 function destroy (req, res) {
     const id = parseInt(req.params.id);
