@@ -4,6 +4,8 @@ const port = 3000
 
 const postRouter = require('./routers/post');
 
+// Attivazione body parser per formato json per le rotte
+app.use(express.json());
 app.use(express.static('public'));
 
 // rotta di home

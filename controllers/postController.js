@@ -38,7 +38,26 @@ function show (req, res) {
     res.json(postTrovato);
 };
 function store (req, res) {
-    res.send('Creazione nuovo post');
+    // Creiamo un nuovo id incrementando l'ultimo id presente
+    const newId = postsRouter[postsRouter.length - 1].id + 1;
+    
+    // Creiamo un nuovo post
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+    // Aggiungiamo il nuovo post
+    postsRouter.push(newPost);
+
+    // Controlliamo
+    console.log(postsRouter);
+
+    // Restituiamo lo status corretto e il post creato
+    res.status(201);
+    res.json(newPost);
 };
 function update (req, res) {
     res.send('Modifica integrale post ' + req.params.id);
