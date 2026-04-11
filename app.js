@@ -4,6 +4,9 @@ const port = 3000
 
 const postRouter = require('./routers/post');
 
+// importo middleware di checkTime
+const checkTime = require("./middlewares/checkTime");
+
 // importo middleware di gestione errore interni server 500
 const errorsHandler = require('./middlewares/errorsHandler');
 
@@ -13,6 +16,9 @@ const notFound = require('./middlewares/notFound');
 // Attivazione body parser per formato json per le rotte
 app.use(express.json());
 app.use(express.static('public'));
+
+// registra globalmente il middleware di gestione
+app.use(checkTime);
 
 // rotta di home
 app.get('/', (req, res) => {
