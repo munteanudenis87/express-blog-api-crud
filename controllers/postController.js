@@ -11,6 +11,10 @@ function index (req, res) {
             post => post.tags.includes(req.query.tags)
         );
     }
+
+    // errore per provare middleware errorsHandler
+    fun.ciao();
+    
     const postCompleto = {
         numeroPosts: filteredPost.length,
         listaPosts: filteredPost
